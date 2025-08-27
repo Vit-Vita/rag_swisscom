@@ -1,47 +1,40 @@
 # ─── UI & App ────────────────────────────────────────────────
-streamlit
+streamlit>=1.33,<2.0                 # chat interface
 
-# ─── LangChain Stack ─────────────────────────────────────────
+# ─── LangChain stack ─────────────────────────────────────────
 langchain
 langchain-community
-langchain-experimental
-langchain-huggingface
-langchain-openai  # Replaces the standalone 'openai' for better integration
+langchain-core
+chromadb ##
+tiktoken ##
+langchain-experimental ##
+sentence_transformers ##
+langchain_huggingface ##
 
-# ─── Vector DB ───────────────────────────────────────────────
-chromadb
-pinecone-client
-sentence-transformers # Often used with ChromaDB for embeddings
-tiktoken
+selenium
+webdriver-manager
 
-# ─── Data Wrangling & Scraping ───────────────────────────────
-pandas
-beautifulsoup4
-pypdf
+# ─── Vector DB + LLM clients ─────────────────────────────────
+pinecone-client>=3.0,<4.0            # vector store
+openai>=1.23,<2.0                    # embeddings + chat models
+
+# ─── Data wrangling & progress ───────────────────────────────
+pandas>=2.1,<3.0
+tqdm>=4.66,<5.0
+
+# ─── Parsing / helpers ───────────────────────────────────────
+beautifulsoup4>=4.12,<5.0            # html parser for WebBaseLoader
+pypdf>=4.0,<5.0                      # PDF loader backend
+rapidfuzz>=3.6,<4.0                  # fuzzy title matching
+python-dotenv>=1.0,<2.0              # .env support
+docling
+
+# --- Specific Dependency Fixes ---
+protobuf==3.20.3
+pysqlite3-binary
+python-dotenv
+
+#------Scraping ----------------------
 playwright
 unstructured
-rapidfuzz
-tqdm
 
-# ─── Postgres Database ───────────────────────────────────────
-sqlalchemy
-psycopg2-binary
-pgvector
-
-# ─── Speech Recognition ──────────────────────────────────────
-SpeechRecognition
-PyAudio
-
-# ─── Hugging Face ────────────────────────────────────────────
-huggingface_hub
-hf_xet
-
-# ─── Evaluation ──────────────────────────────────────────────
-ragas
-datasets
-seaborn
-
-# ─── Helpers & Specific Fixes ────────────────────────────────
-python-dotenv
-pysqlite3-binary
-protobuf==3.20.3
