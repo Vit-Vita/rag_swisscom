@@ -8,6 +8,7 @@ from urllib.parse import urljoin, unquote
 import shutil
 from collections import deque
 from langchain.output_parsers import PydanticOutputParser
+import subprocess
 
 # LangChain and vector store imports
 __import__('pysqlite3')
@@ -27,6 +28,26 @@ from typing import Optional
 from playwright.sync_api import sync_playwright
 
 load_dotenv()
+
+
+@st.cache_resource
+def install_playwright():
+    """Installs Playwright's browser dependencies."""
+    try:
+        st.write("Installing Playwright browser")
+        print("Installing Playwright browser")
+        subprocess.run(
+            [sys.executable, "-m", "playwright", "install", "--with-deps", "chromium"],
+            check=True
+        )
+        print("Playwright browser installed successfully.")
+        return True
+    except subprocess.CalledProcessError as e:
+        st.error(f"An error occurred during Playwright installation: {e}")
+        print(f"An error occurred during Playwright installation: {e}")
+        return False
+
+playwright_installed = install_playwright()
 
 # --- Helper functions to extract data from URL ---
 def extract_info_from_url(url: str) -> dict:

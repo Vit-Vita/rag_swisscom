@@ -4,6 +4,7 @@ streamlit>=1.33,<2.0                 # chat interface
 # ─── LangChain stack ─────────────────────────────────────────
 langchain
 langchain-community
+langchain-openai
 langchain-core
 chromadb ##
 tiktoken ##

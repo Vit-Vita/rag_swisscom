@@ -1,1 +1,2 @@
-libnss3
+
+chromium-browser
