@@ -29,25 +29,30 @@ from playwright.sync_api import sync_playwright
 
 load_dotenv()
 
-
 @st.cache_resource
-def install_playwright():
-    """Installs Playwright's browser dependencies."""
-    try:
-        st.write("Installing Playwright browser")
-        print("Installing Playwright browser")
-        subprocess.run(
-            [sys.executable, "-m", "playwright", "install", "--with-deps", "chromium"],
-            check=True
-        )
-        print("Playwright browser installed successfully.")
-        return True
-    except subprocess.CalledProcessError as e:
-        st.error(f"An error occurred during Playwright installation: {e}")
-        print(f"An error occurred during Playwright installation: {e}")
-        return False
+def install_playwright_browser():
+    """Installs Playwright's Chromium browser."""
+    with st.spinner("Browser installation in progress... This may take a minute."):
+        try:
+            # We run the install command without --with-deps
+            process = subprocess.run(
+                [sys.executable, "-m", "playwright", "install", "chromium"],
+                capture_output=True,
+                text=True,
+                check=True 
+            )
+            # This output will be visible in your Streamlit logs
+            print("Playwright install stdout:", process.stdout)
+            st.success("Browser installed successfully!")
+        except subprocess.CalledProcessError as e:
+            st.error(f"Failed to install browser. See logs for details.")
+            # Print the specific error to the logs for debugging
+            print("Playwright install stderr:", e.stderr)
+        except Exception as e:
+            st.error(f"An unexpected error occurred during browser installation: {e}")
 
-playwright_installed = install_playwright()
+# Run the installation function
+install_playwright_browser()
 
 # --- Helper functions to extract data from URL ---
 def extract_info_from_url(url: str) -> dict:
