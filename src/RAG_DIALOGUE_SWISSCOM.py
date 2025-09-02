@@ -43,7 +43,7 @@ def install_playwright_browser():
             )
             # This output will be visible in your Streamlit logs
             print("Playwright install stdout:", process.stdout)
-            st.success("Browser installed successfully!")
+            
         except subprocess.CalledProcessError as e:
             st.error(f"Failed to install browser. See logs for details.")
             # Print the specific error to the logs for debugging
